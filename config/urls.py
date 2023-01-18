@@ -10,5 +10,14 @@ urlpatterns = [
     path("mainapp/", include("mainapp.urls", namespace="mainapp")),
 ]
 
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", RedirectView.as_view(url="mainapp/")),
+    path("mainapp/", include("mainapp.urls", namespace="mainapp")),
+    path("authapp/", include("authapp.urls", namespace="authapp")),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
